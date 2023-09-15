@@ -2,4 +2,9 @@ xx = input("Введіть завдання для знаходження дис
 
 a, b, c = map(float, xx.split())
 
-print(f"Відповідь: {b**2 - 4*a*c}")
+def disk(a, b, c):
+    disk = b**2 - 4*a*c
+    return disk
+
+
+print(f"Відповідь: {disk(a, b, c)}")
