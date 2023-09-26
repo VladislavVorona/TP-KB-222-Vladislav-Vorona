@@ -13,10 +13,11 @@ match op:
     case "*":
         res = xx1 * xx2
     case "/":
-        if xx2 == 0:
-            res = "Ділення на нуль"
-        else:
-            res = xx1 / xx2
+        match xx2:
+            case 0:
+                res = "Ділення на нуль"
+            case _:
+                res = xx1 / xx2
     case _:
         res = "Помилка розпізнавання операції"
 
