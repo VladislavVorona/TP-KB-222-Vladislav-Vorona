@@ -1,3 +1,5 @@
+import math
+
 a, b, c = -5, 5, 5
 
 def disk(a, b, c):
@@ -10,8 +12,8 @@ def roots(a, b, c):
 	print(f"Дискримінант: {diskr}")
 
 	if diskr > 0:
-		xx1 = (-b+(diskr**0.5))/(2*a)
-		xx2 = (-b-(diskr**0.5))/(2*a)
+		xx1 = (-b+math.sqrt(diskr))/(2*a)
+		xx2 = (-b-math.sqrt(diskr))/(2*a)
 		root = f"x1 = {xx1} та x2 = {xx2}."
 		return root
 
