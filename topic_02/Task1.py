@@ -23,7 +23,6 @@ def roots(a, b, c):
 		return root
 
 	else:
-		xx1 = f"Отриманий дискримінант ({diskr}) є від'ємним."
-		return xx1
+		return f"Отриманий дискримінант ({diskr}) є від'ємним."
 
 print(f"Відповідь: {roots(a, b, c)}")
