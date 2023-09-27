@@ -5,19 +5,33 @@ xx1 = float(xx[0])
 op = xx[1]
 xx2 = float(xx[2])
 
+
+def plus(xx1, xx2):
+    return xx1 + xx2
+
+def minus(xx1, xx2):
+    return xx1 - xx2
+
+def mno(xx1, xx2):
+    return xx1 * xx2
+
+def dil(xx1, xx2):
+    if xx2 == 0:
+        return "Ділення на нуль"
+    else:
+        return xx1 / xx2
+
+
+
 match op:
     case "+":
-        res = xx1 + xx2
+        res = plus(xx1, xx2)
     case "-":
-        res = xx1 - xx2
+        res = minus(xx1, xx2)
     case "*":
-        res = xx1 * xx2
+        res = mno(xx1, xx2)
     case "/":
-        match xx2:
-            case 0:
-                res = "Ділення на нуль."
-            case _:
-                res = xx1 / xx2
+        res = dil(xx1, xx2)
     case _:
         res = "Помилка розпізнавання операції."
 
