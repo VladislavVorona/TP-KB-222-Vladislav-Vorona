@@ -75,7 +75,6 @@ while True:
 
         if res == "Ваша перемога!":
             playerwin += 1
-            # Навчаємо модель на основі гри
             input_data = [1 if gamerxx == gesture else 0 for gesture in xx]
             target = [1 if computerxx == gesture else 0 for gesture in xx]
             train_model(input_data, target)
