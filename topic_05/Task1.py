@@ -1,12 +1,21 @@
 import random
 
 def winner(gamerxx, computerxx):
-	if gamerxx == computerxx:
-		return "Нічія!"
-	elif (gamerxx == "камінь" and computerxx == "ножиці") or (gamerxx == "ножиці" and computerxx == "папір") or (gamerxx == "папір" and computerxx == "камінь"):
-		return "Ваша перемога!"
-	else:
-		return "Перемога комп'ютера!"
+    results = {
+        ("камінь", "ножиці"): "Ваша перемога!",
+        ("ножиці", "папір"): "Ваша перемога!",
+        ("папір", "камінь"): "Ваша перемога!",
+        ("ножиці", "камінь"): "Перемога комп'ютера!",
+        ("папір", "ножиці"): "Перемога комп'ютера!",
+        ("камінь", "папір"): "Перемога комп'ютера!",
+    }
+    
+    if gamerxx == computerxx:
+        return "Нічія!"
+    elif (gamerxx, computerxx) in results:
+        return results[(gamerxx, computerxx)]
+    else:
+        return "Невідомий варіант!"
 
 def computerfync(difficulty, gamerxx):
 	xx = ["камінь", "ножиці", "папір"]
