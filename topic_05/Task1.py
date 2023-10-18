@@ -3,9 +3,7 @@ import random
 def winner(gamerxx, computerxx):
 	if gamerxx == computerxx:
 		return "Нічія!"
-	elif (gamerxx == "камінь" and computerxx == "ножиці") or \
-		 (gamerxx == "ножиці" and computerxx == "папір") or \
-		 (gamerxx == "папір" and computerxx == "камінь"):
+	elif (gamerxx == "камінь" and computerxx == "ножиці") or (gamerxx == "ножиці" and computerxx == "папір") or (gamerxx == "папір" and computerxx == "камінь"):
 		return "Ваша перемога!"
 	else:
 		return "Перемога комп'ютера!"
