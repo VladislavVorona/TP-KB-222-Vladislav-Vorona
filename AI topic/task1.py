@@ -77,10 +77,9 @@ while True:
 			playerwin += 1
 		elif res == "Перемога комп'ютера!":
 			computerwin += 1
-			
-			input_data = [1 if gamerxx == gesture else 0 for gesture in xx]
+			gamerdata = [1 if gamerxx == gesture else 0 for gesture in xx]
 			target = [1 if computerxx == gesture else 0 for gesture in xx]
-			train_model(input_data, target)
+			train(gamerdata, target)
 
 
 
