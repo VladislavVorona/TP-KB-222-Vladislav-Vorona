@@ -2,7 +2,7 @@ import logging
 from functions import *
 from operations import getxx
 
-logging.basicConfig(filename='Task1.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(module)s - %(funcName)s - %(message)s - line %(lineno)d')
+logging.basicConfig(filename='calc.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(module)s - %(funcName)s - %(message)s - line %(lineno)d')
 
 while True:
 	logging.info(f"Запит змінних у користувача")
