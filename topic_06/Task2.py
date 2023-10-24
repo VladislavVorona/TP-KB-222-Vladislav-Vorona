@@ -14,11 +14,6 @@ def sort(startfile, lastfile, sortk):
 
         logging.info("Сортування")
         students_sort = sorted(students, key=lambda student: (sortk(student), student['grade']))
-        
-
-        if not os.path.exists(lastfile):
-            logging.info(f"Створення файлу {lastfile}")
-            open(lastfile, 'w').close()
 
         with open(lastfile, 'w') as file:
             for student in students_sort:
