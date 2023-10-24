@@ -1,7 +1,7 @@
 import logging
 import os
 
-logging.basicConfig(filename='Task2.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(module)s - %(funcName)s - %(message)s - line %(lineno)d')
+logging.basicConfig(filename='logs/Task2.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(module)s - %(funcName)s - %(message)s - line %(lineno)d')
 
 def sort(startfile, lastfile, sortk):
     try:
