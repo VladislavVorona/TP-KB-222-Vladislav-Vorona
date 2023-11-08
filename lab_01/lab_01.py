@@ -59,8 +59,18 @@ def updateElement():
 
 			nname = input("Please enter new name: ")
 			if nname != "":
-				student["name"] = nname
-				list.sort(key=lambda x: x["name"])
+				if nname != name:
+					deletePosition = list.index(student)
+					del list[deletePosition]
+
+					student["name"] = nname
+					insertPosition = 0
+					for item in list:
+						if nname > item["name"]:
+							insertPosition += 1
+						else:
+							break
+					list.insert(insertPosition, student)
 
 			phone = input("Please enter updated phone: ")
 			if phone != "":
