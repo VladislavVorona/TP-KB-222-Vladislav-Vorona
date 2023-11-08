@@ -56,6 +56,12 @@ def updateElement():
 	for student in list:
 		if name == student["name"]:
 			print(f"Student {name} found. Please update the information:")
+
+			nname = input("Please enter new name: ")
+			if nname != "":
+				student["name"] = nname
+				list.sort(key=lambda x: x["name"])
+
 			phone = input("Please enter updated phone: ")
 			if phone != "":
 				student["phone"] = phone
