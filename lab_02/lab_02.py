@@ -1,4 +1,5 @@
 import csv
+import sys
 
 def FileLoad(file):
 	with open(file, encoding="utf-8") as file:
@@ -65,52 +66,73 @@ def deleteElement():
 
 def updateElement():
 	name = input("Please enter name to be updated: ")
+	found = False
 	for student in list:
 		if name == student["name"]:
+			found = True
 			print(f"Student {name} found. Please update the information:")
 
 			nname = input("Please enter new name: ")
-			if nname != "":
-				if nname != name:
-					deletePosition = list.index(student)
-					del list[deletePosition]
+			deletePosition = list.index(student)
+			break
 
-					student["name"] = nname
-					insertPosition = 0
-					for item in list:
-						if nname > item["name"]:
-							insertPosition += 1
-						else:
-							break
-					list.insert(insertPosition, student)
+	if not found:
+		print("Student not found")
+		return
 
-			phone = input("Please enter updated phone: ")
-			if phone != "":
-				student["phone"] = phone
+	del list[deletePosition]
 
-			while True:
-				try:
-					age = input("Please enter updated age: ")
-					if age != "":
-						student["age"] = int(age)
-					break
-				except ValueError:
-					print("Wrong student age")
+	insertPosition = deletePosition
 
-			email = input("Please enter updated email: ")
-			if email != "":
-				student["email"] = email
+	if nname != "":
+		student["name"] = nname
+		insertPosition = 0
+		for item in list:
+			if nname > item["name"]:
+				insertPosition += 1
+			else:
+				break
 
-			print("Element has been updated")
-			return
-	print("Student not found")
+	list.insert(insertPosition, student)
+
+	phone = input("Please enter updated phone: ")
+	if phone != "":
+		student["phone"] = phone
+
+	while True:
+		try:
+			age = input("Please enter updated age: ")
+			if age != "":
+				student["age"] = int(age)
+			break
+		except ValueError:
+			print("Wrong student age")
+
+	email = input("Please enter updated email: ")
+	if email != "":
+		student["email"] = email
+
+	print("Element has been updated")
+	return
 
 list = [ ]
 AFile = None
 
 def main():
+	global AFile
+
+	if len(sys.argv) > 1:
+		try:
+			file = sys.argv[1]
+			list.extend(FileLoad(file))
+			print("Data loaded successfully.")
+			AFile = file
+		except IOError as e:
+			print("File upload error.")
+	else:
+		print("No CSV file specified in the command line arguments.")
+			
 	while True:
-		global AFile
 		print(f"Active CSV file: {AFile}")
 		choice = input("Please specify the action [ C create, U update, D delete, P print, L load, S save, X exit ] ")
 		match choice.upper():
