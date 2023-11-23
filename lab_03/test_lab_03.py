@@ -50,6 +50,7 @@ def test_updateElement(tmp_path, capsys):
 		captured = TestInputAns.getvalue()
 		assert "Element has been updated" in captured
 		assert vars(StudentL.students[0]) == {"name": "John2", "phone": "123", "age": 30, "email": "john@example.com"}
+		assert sorted(StudentL.students, key=lambda x: (x.name, x.age)) == StudentL.students
 
 def test_addNewElement(tmp_path):
 	with patch('builtins.input', side_effect=["Test", "123", "25", "test@example.com"]):
@@ -58,6 +59,7 @@ def test_addNewElement(tmp_path):
 
 		assert len(StudentL.students) == 1
 		assert vars(StudentL.students[0]) == {"name": "Test", "phone": "123", "age": 25, "email": "test@example.com"}
+		assert sorted(StudentL.students, key=lambda x: (x.name, x.age)) == StudentL.students
 
 def test_deleteElement(capsys):
 	with patch('builtins.input', return_value="John"):
