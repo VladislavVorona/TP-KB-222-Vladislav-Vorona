@@ -39,20 +39,21 @@ def test_SaveFile(TestingData, tmp_path, capsys):
 	LData = FileHandler.LoadFile(str(PathFile), StudentList())
 	assert [vars(student) for student in LData.students] == [vars(student) for student in StudentL.students]
 
-def test_updateElement(tmp_path, capsys):
-	with patch('builtins.input', side_effect=["John2", "123", "30", "john@example.com"]):
+def test_updateElement(tmp_path, capsys, TestingData):
+	with patch('builtins.input', side_effect=["John", "123", "30", "john@example.com"]):
 		StudentL = StudentList()
-		StudentL.students = [Student("John", "123", 30, "john@example.com")]
-	
+		StudentL.students = [Student(**TestingData[0])]
+
 		with patch('sys.stdout', new_callable=StringIO) as TestInputAns:
-			StudentL.updateElement("John")
-	
+			StudentL.updateElement("Bob")
+
 		captured = TestInputAns.getvalue()
 		assert "Element has been updated" in captured
-		assert vars(StudentL.students[0]) == {"name": "John2", "phone": "123", "age": 30, "email": "john@example.com"}
+		assert vars(StudentL.students[0]) == {"name": "John", "phone": "123", "age": 30, "email": "john@example.com"}
 		assert sorted(StudentL.students, key=lambda x: (x.name, x.age)) == StudentL.students
 
-def test_addNewElement(tmp_path):
+
+def test_addNewElement(tmp_path, TestingData):
 	with patch('builtins.input', side_effect=["Test", "123", "25", "test@example.com"]):
 		StudentL = StudentList()
 		StudentL.addNewElement()
@@ -61,24 +62,23 @@ def test_addNewElement(tmp_path):
 		assert vars(StudentL.students[0]) == {"name": "Test", "phone": "123", "age": 25, "email": "test@example.com"}
 		assert sorted(StudentL.students, key=lambda x: (x.name, x.age)) == StudentL.students
 
-def test_deleteElement(capsys):
+def test_deleteElement(capsys, TestingData):
 	with patch('builtins.input', return_value="John"):
 		StudentL = StudentList()
-		StudentL.students = [Student("John", "123", 25, "john@example.com")]
-		
+		StudentL.students = [Student(**TestingData[0])]
+
 		with patch('sys.stdout', new_callable=StringIO) as TestInputAns:
 			StudentL.deleteElement("John")
 
 		captured = TestInputAns.getvalue()
-		assert "Element was not found" in captured
+		assert "Student not found" in captured
 
-def test_printAllList(capsys):
+def test_printAllList(capsys, TestingData):
 	StudentL = StudentList()
-	StudentL.students = [Student("John", "123", 25, "john@example.com")]
+	StudentL.students = [Student(**TestingData[0])]
 
 	with patch('sys.stdout', new_callable=StringIO) as TestInputAns:
 		StudentL.printAllList()
 
 	captured = TestInputAns.getvalue()
-	assert "Student name is John, Phone is 123, Age is 25, Email is john@example.com" in captured
-
+	assert "Student name is Bob, Phone is 1112233, Age is 20, Email is bob@example.com" in captured

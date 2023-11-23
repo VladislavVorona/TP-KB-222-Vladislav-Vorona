@@ -22,11 +22,19 @@ class StudentList:
 		print("New element has been added")
 
 	def deleteElement(self, name):
+		found = False
 		for student in self.students:
 			if name == student.name:
-				self.students.remove(student)
+				found = True
+				print(f"Student {name} found. Please update the information:")
+				deletePosition = self.students.index(student)
 				break
-		print("Element was not found")
+
+		if not found:
+			print("Student not found")
+			return
+
+		del self.students[deletePosition]
 
 	def updateElement(self, name):
 		found = False
