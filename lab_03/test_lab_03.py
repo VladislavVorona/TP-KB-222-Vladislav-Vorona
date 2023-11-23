@@ -54,13 +54,29 @@ def test_updateElement(tmp_path, capsys, TestingData):
 
 
 def test_addNewElement(tmp_path, TestingData):
+	StudentL = StudentList()
+
 	with patch('builtins.input', side_effect=["Test", "123", "25", "test@example.com"]):
-		StudentL = StudentList()
 		StudentL.addNewElement()
 
-		assert len(StudentL.students) == 1
-		assert vars(StudentL.students[0]) == {"name": "Test", "phone": "123", "age": 25, "email": "test@example.com"}
-		assert sorted(StudentL.students, key=lambda x: (x.name, x.age)) == StudentL.students
+	assert len(StudentL.students) == 1
+	assert vars(StudentL.students[0]) == {"name": "Test", "phone": "123", "age": 25, "email": "test@example.com"}
+	assert sorted(StudentL.students, key=lambda x: (x.name, x.age)) == StudentL.students
+
+	with patch('builtins.input', side_effect=["AAA", "456", "30", "aaa@example.com"]):
+		StudentL.addNewElement()
+
+	assert len(StudentL.students) == 2
+	assert vars(StudentL.students[0]) == {"name": "AAA", "phone": "456", "age": 30, "email": "aaa@example.com"}
+	assert sorted(StudentL.students, key=lambda x: (x.name, x.age)) == StudentL.students
+
+	with patch('builtins.input', side_effect=["YYY", "789", "35", "yyy@example.com"]):
+		StudentL.addNewElement()
+
+	assert len(StudentL.students) == 3
+	assert vars(StudentL.students[2]) == {"name": "YYY", "phone": "789", "age": 35, "email": "yyy@example.com"}
+	assert sorted(StudentL.students, key=lambda x: (x.name, x.age)) == StudentL.students
+
 
 def test_deleteElement(capsys, TestingData):
 	with patch('builtins.input', return_value="John"):
